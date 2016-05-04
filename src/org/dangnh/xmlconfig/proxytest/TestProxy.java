@@ -13,6 +13,6 @@ public class TestProxy {
                 Foo.class.getClassLoader(),
                 new Class[]{Foo.class},
                 handler);
-        f.bar();
+        System.out.println(f.bar());
     }
 }
