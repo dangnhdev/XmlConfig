@@ -16,13 +16,13 @@ import java.util.Stack;
  * @author Nguyen Hai Dang
  */
 class XmlToPropsParser {
-    private SAXParserFactory factory = null;
+    private static volatile SAXParserFactory factory = null;
 
     private SAXParserFactory parserFactory(){
         if (factory == null){
             synchronized (this){
                 if (factory == null){
-                    this.factory = SAXParserFactory.newInstance();
+                    factory = SAXParserFactory.newInstance();
                 }
             }
         }
