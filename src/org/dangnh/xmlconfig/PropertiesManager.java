@@ -11,11 +11,9 @@ import java.util.Properties;
  * Created by DangNH on 5/4/2016.
  */
 class PropertiesManager {
-    private final Class<?> clazz;
     private final Properties properties = new Properties();
 
-    public PropertiesManager(Class<?> clazz) {
-        this.clazz = clazz;
+    PropertiesManager(Class<?> clazz) {
         loadDefault(properties, clazz);
         loadFromFile(properties, clazz);
     }
@@ -30,7 +28,7 @@ class PropertiesManager {
     }
 
     private static void loadFromFile(Properties properties, Class<?> clazz){
-        XmlToPropParser parser = new XmlToPropParser();
+        XmlToPropsParser parser = new XmlToPropsParser();
         String source = getSourceString(clazz);
         try {
             parser.load(properties, source);
@@ -45,7 +43,7 @@ class PropertiesManager {
         return source.value();
     }
 
-    public String getProperty(String key){
+    String getProperty(String key) {
         return properties.getProperty(key);
     }
 }

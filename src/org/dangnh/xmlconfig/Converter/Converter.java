@@ -5,6 +5,6 @@ import java.lang.reflect.Method;
 /**
  * Created by DangNH on 5/4/2016.
  */
-public interface IConverter {
+public interface Converter {
     Object convert(Method targetMethod, Class<?> targetType, String data);
 }

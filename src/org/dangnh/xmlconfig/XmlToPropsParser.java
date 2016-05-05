@@ -4,6 +4,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -14,7 +15,7 @@ import java.util.Stack;
 /**
  * @author Nguyen Hai Dang
  */
-class XmlToPropParser {
+class XmlToPropsParser {
     private SAXParserFactory factory = null;
 
     private SAXParserFactory parserFactory(){
@@ -28,7 +29,7 @@ class XmlToPropParser {
         return factory;
     }
 
-    public void load(Properties props, String uri) throws IOException {
+    void load(Properties props, String uri) throws IOException {
         try{
             SAXParser parser = parserFactory().newSAXParser();
             XmlToPropsHandler handler = new XmlToPropsHandler(props);
@@ -43,7 +44,7 @@ class XmlToPropParser {
         private final Stack<String> paths = new Stack<>();
         private final Stack<StringBuilder> value = new Stack<>();
 
-        public XmlToPropsHandler(Properties props){
+        XmlToPropsHandler(Properties props) {
             this.props = props;
         }
 

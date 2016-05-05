@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="XmlConfig:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/XmlConfig_jar</output-path>
+    <root id="archive" name="XmlConfig.jar">
+      <element id="module-output" name="XmlConfig" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
+    </root>
+  </artifact>
+</component>
