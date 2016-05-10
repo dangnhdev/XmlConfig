@@ -21,14 +21,14 @@ public enum DefaultConverter {
                 if (targetType == Float.TYPE) return Float.parseFloat(data);
                 if (targetType == Double.TYPE) return Double.parseDouble(data);
             }
-            return SpecialConvertedResult.SKIP;
+            return SpecialConvertedResult.NEXT;
         }
     },
     ConverterAnnotation {
         @Override
         Object tryConvert(Method targetMethod, Class<?> targetType, String data) {
             CustomConverter converterAnnotation = targetMethod.getAnnotation(CustomConverter.class);
-            if (converterAnnotation == null) return SpecialConvertedResult.SKIP;
+            if (converterAnnotation == null) return SpecialConvertedResult.NEXT;
 
             Class<? extends Converter> customConverterClass = converterAnnotation.value();
             Converter converter;
@@ -53,7 +53,7 @@ public enum DefaultConverter {
     public static Object convert(Method targetMethod, Class<?> targetType, String data) {
         for (DefaultConverter converter : values()) {
             Object convertedValue = converter.tryConvert(targetMethod, targetType, data);
-            if (convertedValue != SpecialConvertedResult.SKIP)
+            if (convertedValue != SpecialConvertedResult.NEXT)
                 return convertedValue;
         }
         return null;
@@ -62,6 +62,6 @@ public enum DefaultConverter {
     abstract Object tryConvert(Method targetMethod, Class<?> targetType, String data);
 
     private enum SpecialConvertedResult {
-        SKIP
+        NEXT
     }
 }
