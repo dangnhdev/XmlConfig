@@ -2,6 +2,8 @@ package org.dangnh.xmlconfig;
 
 import org.dangnh.xmlconfig.annotation.Source;
 import org.dangnh.xmlconfig.exception.SourceNotDefinedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -11,6 +13,7 @@ import java.util.Properties;
  * Created by DangNH on 5/4/2016.
  */
 class PropertiesManager {
+    private static final Logger log = LoggerFactory.getLogger(PropertiesManager.class);
     private final Properties properties = new Properties();
 
     PropertiesManager(Class<?> clazz) {
@@ -33,7 +36,7 @@ class PropertiesManager {
         try {
             parser.load(properties, source);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log.error("Error while load config from file", e);
         }
     }
 

@@ -1,5 +1,7 @@
 package org.dangnh.xmlconfig;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -16,6 +18,7 @@ import java.util.Stack;
  * @author Nguyen Hai Dang
  */
 class XmlToPropsParser {
+    private static final Logger log = LoggerFactory.getLogger(XmlToPropsParser.class);
     private static volatile SAXParserFactory factory = null;
 
     private SAXParserFactory parserFactory(){
@@ -34,8 +37,9 @@ class XmlToPropsParser {
             SAXParser parser = parserFactory().newSAXParser();
             XmlToPropsHandler handler = new XmlToPropsHandler(props);
             parser.parse(uri, handler);
+            log.info("Starting parse config file: " + uri);
         } catch (ParserConfigurationException | SAXException e) {
-            throw new RuntimeException(e);
+            log.error("Error occurred when parse " + uri, e);
         }
     }
 
@@ -47,6 +51,7 @@ class XmlToPropsParser {
         XmlToPropsHandler(Properties props) {
             this.props = props;
         }
+
 
         @Override
         public void startElement(String uri, String localName, String qName,
